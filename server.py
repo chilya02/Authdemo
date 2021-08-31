@@ -117,7 +117,7 @@ def parse_phone_from_string(data: dict = Body(...)):
 
 
 @app.post("/unify_phone_from_form")
-def parse_phone_from_form(phone: str = Form(...):
+def parse_phone_from_form(phone: str = Form(...)):
     buf = ''
     for char in phone:
         if char.isnumeric():
