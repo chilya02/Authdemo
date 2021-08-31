@@ -52,7 +52,7 @@ def sign_data(data: str) -> str:
             ).hexdigest().upper()
 
 
-@app.get("/")
+@app.get("/login")
 def index_page(username: Optional[str] = Cookie(default=None)):
     with open('templates/login.html', 'r') as f:
         login_page = f.read()
