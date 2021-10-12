@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/style.css">
+    {% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+    {% if data.authenticated %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+			let authbtn = document.querySelector('a[id=auth]');
+			authbtn.addEventListener('click', async function(event){
+                event.preventDefault();
+                let response = await fetch("/logout", {  	//Await делает код неблокирующим
+						method: "POST",
+						headers: {'Content-Type': 'application/json'}
+                    })
+                    let response_json = await response.json();
+				if (response_json.success){
+                    window.location.replace("/")
+                }
+            })
+        })
+    </script>
+    {% endif %}
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav_links">
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+        <a id="auth" href="{% if data.authenticated %}#{% else %}/login{% endif %}"><Button>{% if data.authenticated %}Logout{% else %}Login{% endif %}</Button></a>
+    </header>
+    <div id=content>{% block content %}{% endblock %}</div>
+</body>
+</html>

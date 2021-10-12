@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Лабораторная работа №1{% endblock %}
+{% block content %}
+    <div id="canvas">
+    <canvas id='example' width="1000" height="500">Обновите браузер</canvas>
+    </div>
+    <script>
+        var example = document.getElementById("example");
+        ctx = example.getContext('2d');
+        ctx.fillStyle = "black";
+        ctx.strokeStyle = "black";
+        var width = 10;
+        ctx.fillRect(70,0,50,ctx.canvas.height/2 - width/2);
+        ctx.fillRect(70,ctx.canvas.height/2 + width/2,50,ctx.canvas.height);
+        ctx.fillRect(900, 0, 10, ctx.canvas.height)
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        for (let i = 0; i < 50; i++)
+        {
+
+            ctx.moveTo(910, (i+1)*10)
+            ctx.lineTo(925, i*10)
+
+        }
+        ctx.closePath();
+        ctx.stroke();
+    </script>
+{% endblock %}
