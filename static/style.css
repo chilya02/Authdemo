@@ -7,6 +7,7 @@
 	padding: 0;	
 
 }
+
 body {
 	background-color: #24252A;
 	width: 100%;
@@ -19,6 +20,7 @@ header {
 	align-items: center;
 	padding: 30px 10%;
 }
+
 li, a, button {
 	font-family: "Montserrat", sans-serif;
 	font-weight: 500;
@@ -26,9 +28,11 @@ li, a, button {
 	color: #edf0f1;
 	text-decoration: none;
 }
+
 .nav_links {
 	list-style: none;
 }
+
 .nav_links li {
 	display: inline-block;
 	padding: 0px 20px;
@@ -108,7 +112,6 @@ div.placeholder {
 	transition: all 0.2s; 
 }
 
-
 .overlay { 
 	opacity: 0; 
 	visibility: hidden; 
@@ -138,10 +141,12 @@ div.placeholder {
 	-webkit-box-shadow: 0 0 20px rgba(0,0,0,0.85); 
 	box-shadow: 0 0 20px rgba(0,0,0,0.85); 
 }
+
 #out_modal {
 	display: flex;
 	flex-direction: column;
-	height: 150px;
+	height: 200px;
+	justify-content: space-around;
 }
 
 .dlg-modal-fade { 
@@ -191,6 +196,7 @@ div.placeholder {
 		visibility: visible; 
 	}
 }
+
 .fadeIn { 
 	-webkit-animation-name: fadeIn; 
 	animation-name: fadeIn; 
@@ -208,6 +214,7 @@ div.placeholder {
 		visibility: hidden; 
 	}
 }
+
 .fadeOut { 
 	-webkit-animation-name: fadeOut;
 	 animation-name: fadeOut;
@@ -227,6 +234,7 @@ div.placeholder {
 		transform: translate(-50%, -50%); 
 	}
 }
+
 .slideInDown { 
 	-webkit-animation-name: slideInDown; 
 	animation-name: slideInDown; 
@@ -246,6 +254,7 @@ div.placeholder {
 		transform: translate(-50%, -100%); 
 	}
 }
+
 .slideOutUp { 
 	-webkit-animation-name: slideOutUp; 
 	animation-name: slideOutUp; 

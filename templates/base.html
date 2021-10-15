@@ -52,13 +52,13 @@
     <header>
         <nav>
             <ul class="nav_links">
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="#">Сервисы</a></li>
+                <li><a href="#">Проекты</a></li>
+                <li><a href="#">Связяться</a></li>
             </ul>
         </nav>
         <!--<a id="auth" href="{% if data.authenticated %}#{% else %}/login{% endif %}">-->
-            <Button id = "auth" {% if data.authenticated %}data-modal="out_modal"{% else %}data-modal="auth_modal"{% endif %}>{% if data.authenticated %}Logout{% else %}Login{% endif %}</Button>
+            <Button id = "auth" {% if data.authenticated %}data-modal="out_modal"{% else %}data-modal="auth_modal"{% endif %}>{% if data.authenticated %}Выйти{% else %}Войти{% endif %}</Button>
         <!--</a>-->
     </header>
     <div id=content>{% block content %}{% endblock %}</div>
