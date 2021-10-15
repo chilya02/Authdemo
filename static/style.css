@@ -4,9 +4,15 @@
 *{
 	box-sizing: border-box;
 	margin: 0;
-	padding: 0;
-	background-color: #24252A;
+	padding: 0;	
+
 }
+body {
+	background-color: #24252A;
+	width: 100%;
+	height: 100%;
+}
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -38,15 +44,27 @@ li, a, button {
 
 button {
 	padding: 9px 25px;
-	background-color: rgba(0,136,169, 1);
+	
 	border: none;
 	border-radius: 50px;
 	cursor: pointer;
 	transition: all 0.3s ease 0s;
 }
 
-button:hover{
+button#auth, button#cancel {
+	background-color: rgba(0,136,169, 1);
+}
+
+button#auth:hover, button#cancel:hover{
 	background-color: rgba(0,136,169, 0.8);	
+}
+
+button#logout{
+	background-color: rgba(120, 120, 120, 1);
+}
+
+button#logout:hover{
+	background-color: rgba(120, 120, 120, 0.8);
 }
 
 input {
@@ -55,37 +73,180 @@ input {
 	padding: 15px;
 	margin-bottom:10px;
 	outline: none;
-	color: #edf0f1;
-	border: 1px solid #edf0f1;
+	/*color: #ccc;*/
+	border: 1px solid #ccc;
 	border-radius: 6px;
 	width: 100%;
 }
+
 form.login {
 	width: 90%;
 	min-width: 250px;
 	max-width: 350px;
 }
+
 #login_form {
 	width: 100%;
 	height: 100%;
 	display: flex;
-	/*flex-direction: column;*/
-	align-items: space-between;
+	flex-direction: column;
+	align-items: center;
 }
+
 div.placeholder {
 	flex: 1;
+}	
+
+
+
+
+
+
+/* transition */
+.btn, .closer, .overlay { 
+	-webkit-transition: all 0.2s; 
+	transition: all 0.2s; 
 }
-div#canvas {
+
+
+.overlay { 
+	opacity: 0; 
+	visibility: hidden; 
+	position:fixed; 
+	left: 0; 
+	right: 0; 
+	top: 0;
+	bottom: 0;
+	z-index: 5; 
+	background: rgba(0,0,0,0.87); 
+}
+
+.dlg-modal { 
+	width: 100%; 
+	min-width: 250px;
+	max-width: 350px; 
+	height: 300px; 
+	opacity: 0; 
+	visibility: hidden; 
+	text-align: center; 
+	position: fixed; 
+	left: 50%; 
+	z-index: 10; 
+	padding: 35px 36px; 
+	background: ghostwhite;
+	border-radius: 10px; 
+	-webkit-box-shadow: 0 0 20px rgba(0,0,0,0.85); 
+	box-shadow: 0 0 20px rgba(0,0,0,0.85); 
+}
+#out_modal {
 	display: flex;
-	color: #edf0f1;
-	justify-content: space-around;
-	border: 1px solid #edf0f1;
-	border-radius: 6px;
-	margin: 15px;
+	flex-direction: column;
+	height: 150px;
 }
-canvas {
-	border: 3px solid #edf0f1;
-	border-radius: 6px;
-	width: 80%;
-	background-color: gray;
+
+.dlg-modal-fade { 
+	top: 50%; 
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%); 
+}
+
+.dlg-modal-slide { 
+	top: -20px; 
+	-webkit-transform: translate(-50%, -100%); 
+	transform: translate(-50%, -100%); 
+	visibility: visible; 
+	opacity: 1; 
+}
+
+.closer { 
+	width: 40px; 
+	height: 40px; 
+	display: block; 
+	position: absolute; 
+	right: 10px; 
+	top: 10px; 
+	background: url('cross.png') no-repeat; 
+	cursor: pointer; 
+}
+
+.closer:hover { 
+	-webkit-transform: rotate(90deg); 
+	transform: rotate(90deg); 
+}
+
+/* animation */
+.fadeIn, .fadeOut, .slideInDown, .slideOutUp { 
+	-webkit-animation-duration: 0.4s; 
+	animation-duration: 0.4s; 
+	-webkit-animation-timing-function: linear; 
+	animation-timing-function: linear; 
+}
+
+@keyframes fadeIn { 
+	from { opacity: 0; 
+		visibility: hidden; 
+	}
+	to { 
+		opacity:1; 
+		visibility: visible; 
+	}
+}
+.fadeIn { 
+	-webkit-animation-name: fadeIn; 
+	animation-name: fadeIn; 
+	opacity: 1; 
+	visibility: visible; 
+}
+
+@keyframes fadeOut { 
+	from { 
+		opacity: 1;
+		visibility: visible; 
+	}
+	to { 
+		opacity:0; 
+		visibility: hidden; 
+	}
+}
+.fadeOut { 
+	-webkit-animation-name: fadeOut;
+	 animation-name: fadeOut;
+	  opacity: 0;
+	   visibility: hidden;
+}
+
+@keyframes slideInDown { 
+	from { 
+		top: -20px;
+		-webkit-transform: translate(-50%, -100%); 
+		transform: translate(-50%, -100%); 
+	}
+	to { 
+		top: 50%; 
+		-webkit-transform: translate(-50%, -50%); 
+		transform: translate(-50%, -50%); 
+	}
+}
+.slideInDown { 
+	-webkit-animation-name: slideInDown; 
+	animation-name: slideInDown; 
+	top: 50%; 
+	transform: translate(-50%, -50%); 
+}
+
+@keyframes slideOutUp { 
+	from { 
+		top: 50%; 
+		-webkit-transform: translate(-50%, -50%); 
+		transform: translate(-50%, -50%); 
+	}
+	to { 
+		top: -20px; 
+		-webkit-transform: translate(-50%, -100%); 
+		transform: translate(-50%, -100%); 
+	}
+}
+.slideOutUp { 
+	-webkit-animation-name: slideOutUp; 
+	animation-name: slideOutUp; 
 }

@@ -7,10 +7,11 @@
     <link rel="stylesheet" href="static/style.css">
     {% endblock %}
     <title>{% block title %}{% endblock %}</title>
+    
     {% if data.authenticated %}
     <script>
         document.addEventListener("DOMContentLoaded", function(){
-			let authbtn = document.querySelector('a[id=auth]');
+			let authbtn = document.querySelector('button[id=logout]');
 			authbtn.addEventListener('click', async function(event){
                 event.preventDefault();
                 let response = await fetch("/logout", {  	//Await делает код неблокирующим
@@ -19,12 +20,33 @@
                     })
                     let response_json = await response.json();
 				if (response_json.success){
-                    window.location.replace("/")
+                    location.reload("");
                 }
             })
+        });
+    </script>
+    {% else %}
+    <script>
+    document.addEventListener("DOMContentLoaded", function(){
+        let btn = document.querySelector('input[type=submit]');
+        btn.addEventListener('click', async function(event){
+            event.preventDefault();		//Отменяет поведение кнопки по умолчанию
+            let username = document.querySelector('input[name=username]').value;
+            let password = document.querySelector('input[name=password]').value;
+            let response = await fetch("/login", {  	//Await делает код неблокирующим
+                    method: "POST",
+                    headers: {'Content-Type': 'application/json'},
+                    body: `{"username": "${username}", "password": "${password}"}`
+            });
+            let response_json = await response.json();
+            if (response_json.success){
+                location.reload();
+            }
         })
+    })
     </script>
     {% endif %}
+
 </head>
 <body>
     <header>
@@ -35,8 +57,36 @@
                 <li><a href="#">About</a></li>
             </ul>
         </nav>
-        <a id="auth" href="{% if data.authenticated %}#{% else %}/login{% endif %}"><Button>{% if data.authenticated %}Logout{% else %}Login{% endif %}</Button></a>
+        <!--<a id="auth" href="{% if data.authenticated %}#{% else %}/login{% endif %}">-->
+            <Button id = "auth" {% if data.authenticated %}data-modal="out_modal"{% else %}data-modal="auth_modal"{% endif %}>{% if data.authenticated %}Logout{% else %}Login{% endif %}</Button>
+        <!--</a>-->
     </header>
-    <div id=content>{% block content %}{% endblock %}</div>
+    <div id=content>{% block content %}{% endblock %}
+        <div class="overlay" data-close=""></div>
+        <div id="auth_modal" class="dlg-modal dlg-modal-fade">
+		    <span class="closer" data-close=""></span>
+            <div id="login_form">
+                <div class="placeholder"></div>
+                <form class="login" method="POST" action="/login">
+                    <input class="login" type="text" name="username">
+                    <input class="login" type="password" name="password">
+                    <input class="login" type = submit value='Войти'>
+                </form>
+                <div class="placeholder"></div>
+            </div>
+	    </div>
+        <div id="out_modal" class="dlg-modal dlg-modal-fade">
+		    <span class="closer" data-close=""></span>
+                <h2>Вы правда хотите выйти?</h2>
+                <div>
+                    <button id="logout">Да</button>
+                    <button id="cancel" data-close="">Остаться</button>
+                </div>    
+            </div>
+	    </div>
+    </div>
+    
+    <script>const typeAnimate = 'fade';</script>
+    <script src="static/popup.js"></script>
 </body>
 </html>
