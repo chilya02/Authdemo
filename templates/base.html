@@ -61,31 +61,31 @@
             <Button id = "auth" {% if data.authenticated %}data-modal="out_modal"{% else %}data-modal="auth_modal"{% endif %}>{% if data.authenticated %}Logout{% else %}Login{% endif %}</Button>
         <!--</a>-->
     </header>
-    <div id=content>{% block content %}{% endblock %}
-        <div class="overlay" data-close=""></div>
-        <div id="auth_modal" class="dlg-modal dlg-modal-fade">
-		    <span class="closer" data-close=""></span>
-            <div id="login_form">
-                <div class="placeholder"></div>
-                <form class="login" method="POST" action="/login">
-                    <input class="login" type="text" name="username">
-                    <input class="login" type="password" name="password">
-                    <input class="login" type = submit value='Войти'>
-                </form>
-                <div class="placeholder"></div>
-            </div>
-	    </div>
-        <div id="out_modal" class="dlg-modal dlg-modal-fade">
-		    <span class="closer" data-close=""></span>
-                <h2>Вы правда хотите выйти?</h2>
-                <div>
-                    <button id="logout">Да</button>
-                    <button id="cancel" data-close="">Остаться</button>
-                </div>    
-            </div>
-	    </div>
+    <div id=content>{% block content %}{% endblock %}</div>
+    <div class="overlay" data-close=""></div>
+    {% if data.authenticated %}
+    <div id="out_modal" class="dlg-modal dlg-modal-fade">
+        <span class="closer" data-close=""></span>
+        <h2>Вы правда хотите выйти?</h2>
+        <div>
+            <button id="logout">Да</button>
+            <button id="cancel" data-close="">Остаться</button>
+        </div>    
     </div>
-    
+    {% else %}
+    <div id="auth_modal" class="dlg-modal dlg-modal-fade">
+        <span class="closer" data-close=""></span>
+        <div id="login_form">
+            <div class="placeholder"></div>
+            <form class="login" method="POST" action="/login">
+                <input class="login" type="text" name="username">
+                <input class="login" type="password" name="password">
+                <input class="login" type = submit value='Войти'>
+            </form>
+            <div class="placeholder"></div>
+        </div>
+    </div>
+    {% endif %}
     <script>const typeAnimate = 'fade';</script>
     <script src="static/popup.js"></script>
 </body>
