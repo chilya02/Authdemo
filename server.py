@@ -18,6 +18,7 @@ templates = Jinja2Templates(directory="templates")
 @app.get("/")
 def index_page(request: Request, username: Optional[str] = Cookie(default=None)):
     data = authentication(username)
+    data['section'] = 'updates'
     return templates.TemplateResponse("index_page.html", {'request': request, 'data': data})
 
 

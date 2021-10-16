@@ -3,7 +3,7 @@
 {% block head %}
 	{{ super() }}
 		<script type="text/javascript">
-		document.addEventListener("DOMContentLoaded", function(){
+		document.addEventListener("DOMContentLoaded", function(){	
 			let btn = document.querySelector('input[type=submit]');
 			btn.addEventListener('click', async function(event){
 				event.preventDefault();		//Отменяет поведение кнопки по умолчанию

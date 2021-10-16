@@ -29,6 +29,7 @@ li, a, button {
 	text-decoration: none;
 }
 
+
 .nav_links {
 	list-style: none;
 }
@@ -43,6 +44,10 @@ li, a, button {
 }
 
 .nav_links li a:hover {
+	color: #0088a9
+}
+
+.nav_links li.selected a {
 	color: #0088a9
 }
 
