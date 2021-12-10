@@ -52,10 +52,10 @@
     <header>
         <nav>
             <ul class="nav_links">
-                <li {% if data.section == "updates" %} class="selected"{% endif %}><a href="#">Обновления</a></li>
-                <li {% if data.section == "services" %} class="selected"{% endif %}><a href="#">Сервисы</a></li>
-                <li {% if data.section == "projects" %} class="selected"{% endif %}><a href="#">Проекты</a></li>
-                <li {% if data.section == "contacts" %} class="selected"{% endif %}><a href="#">Контакты</a></li>
+                <li {% if data.section == "updates" %} class="selected"{% endif %}><a href="/">Обновления</a></li>
+                <li {% if data.section == "services" %} class="selected"{% endif %}><a href="/services">Сервисы</a></li>
+                <li {% if data.section == "projects" %} class="selected"{% endif %}><a href="/projects">Проекты</a></li>
+                <li {% if data.section == "contacts" %} class="selected"{% endif %}><a href="/contacts">Контакты</a></li>
             </ul>
         </nav>
         <!--<a id="auth" href="{% if data.authenticated %}#{% else %}/login{% endif %}">-->

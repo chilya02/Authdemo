@@ -1,0 +1,34 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/style.css">
+<script type="text/javascript">
+
+
+    document.addEventListener("DOMContentLoaded", function(){	
+        let btn = document.querySelector('input[type=submit]');
+        btn.addEventListener('click', async function(event){
+            event.preventDefault();		//Отменяет поведение кнопки по умолчанию
+            let answer = document.querySelector('input[name=answer]').value;
+            let response = await fetch("/question_review", {  	//Await делает код неблокирующим
+                    method: "POST",
+                    headers: {'Content-Type': 'application/json'},
+                    body: `{"answer": "${answer}"}`
+            });
+            let response_json = await response.json();
+            let element = document.querySelectorAll('div[class=placeholder]')[1];
+                element.innerHTML = response_json.message;
+        })
+    })
+</script>
+</head>
+<body>
+    <div id="login_form">
+	<div class="placeholder"></div>
+	<form class="login" method="POST" action="/question_review">
+		<input class="login" type="text" name="answer">
+		<input class="login" type = submit value='ОТПРАВИТЬ'>
+	</form>
+	<div class="placeholder"><div>
+    </div>
+</body>
