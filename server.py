@@ -120,7 +120,7 @@ def q1(request: Request):
 def review_answer(data: dict = Body(...)):
     answer = str(data["answer"]).lower().replace(" ", "")
     with open('file.txt', 'a') as f: 
-        f.write(str(datetime.now()) + answer + '\n')
+        f.write(str(datetime.now()) + ' ' + answer + '\n')
     with open('messages.json', 'r') as f:
         answers = json.load(f)
     if answer in answers:
