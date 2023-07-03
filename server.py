@@ -102,35 +102,3 @@ def contacts(request: Request, username: Optional[str] = Cookie(default=None)):
     data['section'] = 'contacts'
     return templates.TemplateResponse("contacts.html", {'request': request, 'data': data})
 
-
-
-
-@app.get("/question")
-def q1(request: Request):
-    return templates.TemplateResponse("quest.html", {'request': request})
-
-
-
-
-
-
-@app.post("/question_review")
-def review_answer(data: dict = Body(...)):
-    answer = str(data["answer"]).lower().replace(" ", "")
-    with open('file.txt', 'a') as f: 
-        f.write(str(datetime.now()) + ' ' + answer + '\n')
-    with open('messages.json', 'r') as f:
-        answers = json.load(f)
-    if answer in answers:
-        response = Response(
-            json.dumps({
-                "success": True,
-                "message": answers[answer]
-                }), media_type="application/json")
-    else:
-        response = Response(
-        json.dumps({
-            "success": False,
-            "message": "ДУХ говорит, <br> ответ неверный "
-            }), media_type="application/json")
-    return response
