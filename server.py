@@ -1,5 +1,3 @@
-#FastAPI server
-#New update
 import base64
 import json
 from datetime import datetime
@@ -92,14 +90,14 @@ def services(request: Request, username: Optional[str] = Cookie(default=None)):
 
 
 @app.get("/projects")
-def services(request: Request, username: Optional[str] = Cookie(default=None)):
+def projects(request: Request, username: Optional[str] = Cookie(default=None)):
     data = authentication(username)
     data['section'] = 'projects'
     return templates.TemplateResponse("projects.html", {'request': request, 'data': data})
 
 
 @app.get("/contacts")
-def services(request: Request, username: Optional[str] = Cookie(default=None)):
+def contacts(request: Request, username: Optional[str] = Cookie(default=None)):
     data = authentication(username)
     data['section'] = 'contacts'
     return templates.TemplateResponse("contacts.html", {'request': request, 'data': data})
