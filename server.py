@@ -1,11 +1,9 @@
 import base64
 import json
-from datetime import datetime
 from fastapi import Body, FastAPI, Cookie, Request
 from fastapi.responses import Response, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from typing import Optional
 from utils import authentication, try_authenticate_user, verify_password, users, sign_data
 
 
@@ -15,20 +13,32 @@ templates = Jinja2Templates(directory="templates")
 
 
 @app.get("/")
-def index_page(request: Request, username: Optional[str] = Cookie(default=None)):
+def index_page(
+        request: Request, 
+        username: str | None = Cookie(default=None)
+        ):
     data = authentication(username)
     data['section'] = 'updates'
-    return templates.TemplateResponse("index_page.html", {'request': request, 'data': data})
+    return templates.TemplateResponse(
+            "index_page.html", 
+            {'request': request, 'data': data}
+            )
 
 
 @app.get("/login")
-def login_page(request: Request, username: Optional[str] = Cookie(default=None)):
+def login_page(
+        request: Request, 
+        username: str | None = Cookie(default=None)
+        ):
 
     if not username:
         data = {
             'authenticated': False,
         }
-        return templates.TemplateResponse("login.html", {'request': request, 'data': data})
+        return templates.TemplateResponse(
+                "login.html", 
+                {'request': request, 'data': data}
+                )
     
     user = try_authenticate_user(username)
     if user:
@@ -37,7 +47,10 @@ def login_page(request: Request, username: Optional[str] = Cookie(default=None))
         data = {
             'authenticated': False
         }
-        response = templates.TemplateResponse("login.html", {'request': request, 'data': data})
+        response = templates.TemplateResponse(
+                "login.html", 
+                {'request': request, 'data': data}
+                )
         response.delete_cookie(key="username")
         return response
 
@@ -76,29 +89,32 @@ def logout_process():
     return response
 
 
-@app.get('/lab1')
-def lab1(request: Request, username: Optional[str] = Cookie(default=None)):
-    data = authentication(username)
-    return templates.TemplateResponse("lab1.html", {'request': request, 'data': data})
-
-
 @app.get("/services")
-def services(request: Request, username: Optional[str] = Cookie(default=None)):
+def services(request: Request, username: str | None = Cookie(default=None)):
     data = authentication(username)
     data['section'] = 'services'
-    return templates.TemplateResponse("services.html", {'request': request, 'data': data})
+    return templates.TemplateResponse(
+            "services.html", 
+            {'request': request, 'data': data}
+            )
 
 
 @app.get("/projects")
-def projects(request: Request, username: Optional[str] = Cookie(default=None)):
+def projects(request: Request, username: str | None = Cookie(default=None)):
     data = authentication(username)
     data['section'] = 'projects'
-    return templates.TemplateResponse("projects.html", {'request': request, 'data': data})
+    return templates.TemplateResponse(
+            "projects.html", 
+            {'request': request, 'data': data}
+            )
 
 
 @app.get("/contacts")
-def contacts(request: Request, username: Optional[str] = Cookie(default=None)):
+def contacts(request: Request, username: str | None = Cookie(default=None)):
     data = authentication(username)
     data['section'] = 'contacts'
-    return templates.TemplateResponse("contacts.html", {'request': request, 'data': data})
+    return templates.TemplateResponse(
+            "contacts.html", 
+            {'request': request, 'data': data}
+            )
 
